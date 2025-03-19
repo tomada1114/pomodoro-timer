@@ -1,0 +1,10 @@
+feat(init): プロジェクト初期化
+
+- Gitリポジトリの初期化
+- Next.jsプロジェクトの作成（TypeScript, ESLint, Tailwind CSS）
+- shadcn/uiのセットアップ
+- CHANGELOGの作成
+
+# プロンプト履歴
+
+1. Q: .clinerules-basic-design の基本設計に従い、Next.js アプリを作成してほしい。まずは計画を策定して。その他、ルールは .clinerules に従ってください。なお、プロジェクトは git init でまず初期化し、その後はできるだけ細かい単位でコミットを行ってください。 A: プロジェクトの初期化と基本設定を実施
