@@ -53,6 +53,17 @@ export default function TimerApp() {
     }));
   }, []);
 
+  // 手動でモードを切り替え
+  const toggleMode = useCallback(() => {
+    setTimerState((prev) => ({
+      ...prev,
+      mode: prev.mode === "work" ? "break" : "work",
+      timeLeft:
+        prev.mode === "work" ? prev.breakDuration : prev.workDuration,
+      isActive: false, // 切り替え時にタイマーを停止
+    }));
+  }, []);
+
   // タイマー開始/停止
   const toggleTimer = useCallback(() => {
     setTimerState((prev) => ({
@@ -108,8 +119,10 @@ export default function TimerApp() {
 
       <Controls
         isActive={timerState.isActive}
+        mode={timerState.mode}
         onToggle={toggleTimer}
         onReset={resetTimer}
+        onModeToggle={toggleMode}
       />
     </div>
   );
