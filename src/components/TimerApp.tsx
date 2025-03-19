@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Controls from "./Controls";
+import CircleProgress from "./CircleProgress";
 
 interface TimerState {
   mode: "work" | "break";
@@ -78,14 +79,33 @@ export default function TimerApp() {
       .padStart(2, "0")}`;
   };
 
+  // 進捗率を計算（0〜1の範囲）
+  const calculateProgress = (): number => {
+    const totalDuration =
+      timerState.mode === "work"
+        ? timerState.workDuration
+        : timerState.breakDuration;
+    return 1 - timerState.timeLeft / totalDuration;
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-8 p-4">
       <h1 className="text-2xl font-bold">
         {timerState.mode === "work" ? "作業時間" : "休憩時間"}
       </h1>
-      <div className="text-4xl font-bold">
-        {formatTime(timerState.timeLeft)}
+
+      <div className="relative">
+        <CircleProgress
+          progress={calculateProgress()}
+          mode={timerState.mode}
+        />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <span className="text-4xl font-bold">
+            {formatTime(timerState.timeLeft)}
+          </span>
+        </div>
       </div>
+
       <Controls
         isActive={timerState.isActive}
         onToggle={toggleTimer}
