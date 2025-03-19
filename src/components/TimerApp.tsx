@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Controls from "./Controls";
 import CircleProgress from "./CircleProgress";
+import { playNotificationSound } from "@/utils/sound";
 
 interface TimerState {
   mode: "work" | "break";
@@ -34,6 +35,7 @@ export default function TimerApp() {
       }, 1000);
     } else if (timerState.isActive && timerState.timeLeft === 0) {
       // タイマー終了時の処理
+      playNotificationSound(); // 通知音を再生
       switchMode();
     }
 
